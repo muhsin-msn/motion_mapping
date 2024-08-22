@@ -1,6 +1,6 @@
-# # motion_mapping
 
-# Project Title
+
+#  motion_mapping
 
 This project involves teleoperating dual Panda robots in simulation. The left arm robot follows the Aruco marker pose . THe right arm robot follows the EE of UR10  robot.
 
