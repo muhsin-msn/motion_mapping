@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+
+<launch>
+
+     <arg name="use_gui" default="false" />
+    
+    <param name="robot_description" 
+           command="cat $(find robots_description)/urdf/panda_arm_hand.urdf" />
+
+    <node name="joint_state_publisher2" 
+        pkg="joint_state_publisher" 
+        type="joint_state_publisher" 
+        output="screen" 
+        unless="$(arg use_gui)" />
+            <rosparam param="source_list">[panda_joint_states_right]</rosparam>
+  
+  
+  <node name="joint_state_publisher_gui2" 
+        pkg="joint_state_publisher_gui" 
+        type="joint_state_publisher_gui"
+        output="screen" 
+        if="$(arg use_gui)" />	
+
+  <node name="robot_state_publisher2" 
+        pkg="robot_state_publisher" 
+        type="robot_state_publisher" />
+        
+    <node name="rviz2" 
+          pkg="rviz" 
+          type="rviz" 
+          args="-d $(find robots_bringup)/launch/rviz_config/panda.rviz" 
+
+          required="true" />
+
+</launch>

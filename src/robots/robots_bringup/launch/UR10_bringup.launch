@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+
+<launch>
+
+     <arg name="use_gui" default="true" />
+    
+    <param name="robot_description" 
+           command="cat $(find robots_description)/urdf/ur10_robot.urdf" />
+      <rosparam command="load" file="/home/muhsin/msb_ws/src/universal_robot/ur_description/yaml/ur10_zeros.yaml"/>
+
+    <node name="joint_state_publisher" 
+        pkg="joint_state_publisher" 
+        type="joint_state_publisher" 
+        output="screen" 
+        unless="$(arg use_gui)" />
+            <rosparam param="source_list">[ur10_arm_joint_states]</rosparam>
+  
+  
+  <node name="joint_state_publisher_gui" 
+        pkg="joint_state_publisher_gui" 
+        type="joint_state_publisher_gui"
+        output="screen" 
+        if="$(arg use_gui)" />	
+
+  <node name="robot_state_publisher" 
+        pkg="robot_state_publisher" 
+        type="robot_state_publisher" />
+        
+    <node name="rviz" 
+          pkg="rviz" 
+          type="rviz" 
+          args="-d $(find robots_bringup)/launch/rviz_config/ur10.rviz" 
+          required="true" />
+
+</launch>

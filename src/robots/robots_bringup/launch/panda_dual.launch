@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+
+<launch>
+
+  <arg name="use_gui" default="false" />
+
+  <param name="robot_description" 
+         command="$(find xacro)/xacro '$(find robots_description)/robots/dual_panda/dual_panda_example.urdf.xacro'" />
+
+  <node name="joint_state_publisher3" 
+        pkg="joint_state_publisher" 
+        type="joint_state_publisher" 
+        output="screen" 
+        unless="$(arg use_gui)" />
+            <rosparam param="source_list">[panda_joint_states_right,panda_joint_states_left]</rosparam>
+            
+
+  <node name="joint_state_publisher_gui3" 
+        pkg="joint_state_publisher_gui" 
+        type="joint_state_publisher_gui"
+        output="screen" 
+        if="$(arg use_gui)" />	
+
+  <node name="robot_state_publisher3" 
+        pkg="robot_state_publisher" 
+        type="robot_state_publisher" />
+    
+  <node name="rviz3" 
+        pkg="rviz" 
+        type="rviz" 
+        args="-d $(find robots_bringup)/launch/rviz_config/panda_dual.rviz" 
+        required="false" />
+
+</launch>
