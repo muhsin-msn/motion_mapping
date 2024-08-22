@@ -51,10 +51,10 @@ Follow these steps to set up and run the project:
      rosrun motion_mapping panda_left_hand.cpp
      ```
 7. **Launch the Simulation**
- - Open CoppeliaSim and load the simulation file and run the simulation:
-   ```sh
-   FrankaSim_bimanualmodified_final_UPDATED2.ttt
-   ```
+   - Open CoppeliaSim and load the simulation file and run the simulation:
+      ```sh
+      FrankaSim_bimanualmodified_final_UPDATED2.ttt
+      ```
  
 
 ## Test Video
